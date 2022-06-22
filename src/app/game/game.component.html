@@ -1,0 +1,22 @@
+<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px': 300 + (i * 90)}" [name]="player" [playerActive]="i == game.currentPlayer"
+   class="player-position"></app-player>
+<div class="table background">
+   <div class="card-circle">
+      <div *ngFor="let card of game.stack;let i = index;" (click)="pickCard(i)" class="card"
+          [ngClass]="{'distribute-card':game.distribute, 'taking-card':game.currentFace == card.face && !game.isTaken[i] ,'card-taken':game.isTaken[i]}"
+          [style.--animation-delay]="i * 50 + 'ms'" [style.--orgDegrees]="card.orgDegrees+ 'deg'"
+          [style.--level]="game.playedIndices.indexOf(i)" [style.--degrees]="card.degrees+'deg'"
+          [style.--XOffset]="card.XOffset+'px'" [style.--YOffset]="card.YOffset+'px'">
+          <div class="card-back">
+              <img src="assets/img/cards/background.png">
+          </div>
+          <div class="card-front">
+              <img src="assets/img/cards/{{ card.face }}.png">
+          </div>
+      </div>
+</div>
+<app-card-info [card]="game.currentFace" class="pin-bottom"></app-card-info>
+
+<button (click)="openDialog()" mat-fab color="primary" class="btn-add">
+   <mat-icon>person_add</mat-icon>
+</button>

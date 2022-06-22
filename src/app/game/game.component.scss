@@ -1,0 +1,159 @@
+.game-area{
+   width: 100vw;
+   height: 100vh;
+   max-width: 100%;
+   background-image: url("/assets/img/table.jpg");
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.player-position{
+   position: absolute;
+   right: 0;
+   z-index: 1;
+}
+
+.btn-add{
+   position: absolute;
+   right: 32px;
+   bottom: 32px;
+}
+
+.pin-bottom{
+   position: absolute;
+   left: 100px;
+   right: 100px;
+   bottom: 32px;
+}
+
+.game-over {
+   position: absolute;
+   z-index: 200;
+   top: 50vh;
+   left: 50vw;
+   transform: translateX(-50%) translateY(-50%);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   img {
+       width: 50vw;
+       min-width: 330px;
+       max-width: 560px;
+       height: auto;
+   }
+
+   span {
+       position: absolute;
+       font-size: 52px;
+   }
+}
+
+.card-circle {
+   position: relative;
+   height: 100vh;
+   width: calc(100vw - 250px);
+}
+
+.card {
+   position: absolute;
+   left: 50%;
+   top: 37.5vh;
+   height: 20vh;
+   width: calc(20vh / 726 * 500);
+   transform: rotate(var(--orgDegrees)) translateY(-32.5vh);
+   cursor: pointer;
+   perspective: 1000px;
+   transform-style: preserve-3d;
+   transform-origin: 50% 50%;
+}
+
+.card-back,
+.card-front {
+   position: absolute;
+   backface-visibility: hidden;
+   height: 100%;
+   width: 100%;
+   border-radius: 15px;
+   box-shadow: 0px 0px 2px 5px rgba(0, 0, 0, 0.15);
+
+   img {
+       height: 100%;
+       width: 100%;
+       object-fit: scale-down;
+   }
+}
+
+.card-back {
+   &:hover {
+       filter: brightness(0.7);
+   }
+}
+
+.card-front {
+   transform: rotateX(180deg);
+}
+
+.distribute-card {
+   opacity: 0;
+   animation-name: distributeCards;
+   animation-timing-function: linear;
+   animation-duration: 1000ms;
+   animation-fill-mode: forwards;
+   animation-delay: var(--animation-delay);
+}
+
+@keyframes distributeCards {
+   from {
+       opacity: 1;
+       left: 50%;
+       top: 37.5vh;
+       transform: none;
+   }
+
+   to {
+       opacity: 1;
+       left: 50%;
+       top: 37.5vh;
+       transform: rotate(var(--orgDegrees)) translateY(-32.5vh);
+   }
+}
+
+.taking-card {
+   animation-name: takeCardAnimation;
+   animation-duration: 1000ms;
+   animation-timing-function: cubic-bezier(0.48, 0.05, 0.35, 0.93);
+   animation-fill-mode: forwards;
+}
+
+@keyframes takeCardAnimation {
+   0% {
+       transform: rotate(var(--orgDegrees)) translateY(-32.5vh);
+   }
+
+   20% {
+       transform: rotate(var(--orgDegrees)) translateY(-45vh);
+   }
+
+   25% {
+       z-index: 100;
+       transform: rotate(var(--orgDegrees)) translateY(-45vh) rotateX(-120deg) scale(1.2);
+   }
+
+   30% {
+       z-index: 100;
+       transform: rotate(var(--orgDegrees)) translateY(-45vh) rotateX(-180deg) scale(1.2);
+   }
+
+   100% {
+       z-index: var(--level);
+       transform: rotate(var(--degrees)) translateX(var(--XOffset)) translateY(var(--YOffset)) rotateX(-180deg) scale(1.0);
+   }
+}
+
+.card-taken {
+   z-index: var(--level);
+   transform: rotate(var(--degrees)) translateX(var(--XOffset)) translateY(var(--YOffset)) rotateX(-180deg);
+}
+
