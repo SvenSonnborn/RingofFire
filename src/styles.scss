@@ -12,6 +12,18 @@ body {
    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+@media (max-width: 950px) {
+   .hide-mobile {
+      display: none;
+   }
+}
+
+@media (min-width: 950px) {
+   .hide-desktop {
+      display: none;
+   }
+}
+
 .full-w{
    width:100%;
 }

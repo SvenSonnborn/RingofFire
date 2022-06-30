@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Player } from 'src/models/player.class';
+import { DialogData } from '../player/player.component';
+
 
 @Component({
   selector: 'app-dialog-edit-player',
   templateUrl: './dialog-edit-player.component.html',
   styleUrls: ['./dialog-edit-player.component.scss']
 })
-export class DialogEditPlayerComponent implements OnInit {
+export class DialogEditPlayerComponent{
+  player: Player;
+  selectedAvatar: 'User1.png';
+  avatars: string[] = [
+    'girl-long-hair.png',
+    'boy-orange.png',
+    'girl-orange.png',
+    'girl.png',
+    'man-beard.png',
+    'man-bold.png'
+  ]
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(public dialogRef: MatDialogRef<DialogEditPlayerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    this.player = data;
   }
 
 }

@@ -1,12 +1,26 @@
 <h1 mat-dialog-title>Add new player</h1>
-<div mat-dialog-content>
+
+<mat-dialog-content [formGroup]="form">
+
   <p>Please enter the name of a player.</p>
+
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="name">
+    <input matInput formControlName="name">
   </mat-form-field>
-</div>
+
+  <p>Please choose an avatar</p>
+
+  <div class="avatar">
+    <label *ngFor="let picture of allProfilePictures;let i=index">
+      <input type="radio" name="picture" [value]="picture" formControlName="picture">
+      <img [class.checked]="form.value.picture==picture" src="./assets/img/User/{{ picture }}">
+    </label>
+  </div>
+
+</mat-dialog-content>
+
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+  <button mat-button>No Thanks</button>
+  <button mat-button [disabled]="form.value.name.length==0||form.value.avatar==''" [mat-dialog-close]="form.value">Ok</button>
 </div>

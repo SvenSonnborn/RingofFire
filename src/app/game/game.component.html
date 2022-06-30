@@ -1,22 +1,59 @@
-<app-player *ngFor="let player of game.players; let i = index;" [ngStyle]="{'top.px': 300 + (i * 90)}" [name]="player" [playerActive]="i == game.currentPlayer"
-   class="player-position"></app-player>
-<div class="table background">
-   <div class="card-circle">
-      <div *ngFor="let card of game.stack;let i = index;" (click)="pickCard(i)" class="card"
-          [ngClass]="{'distribute-card':game.distribute, 'taking-card':game.currentFace == card.face && !game.isTaken[i] ,'card-taken':game.isTaken[i]}"
-          [style.--animation-delay]="i * 50 + 'ms'" [style.--orgDegrees]="card.orgDegrees+ 'deg'"
-          [style.--level]="game.playedIndices.indexOf(i)" [style.--degrees]="card.degrees+'deg'"
-          [style.--XOffset]="card.XOffset+'px'" [style.--YOffset]="card.YOffset+'px'">
-          <div class="card-back">
-              <img src="assets/img/cards/background.png">
-          </div>
-          <div class="card-front">
-              <img src="assets/img/cards/{{ card.face }}.png">
-          </div>
-      </div>
+<app-player  *ngFor="let player of game.players; let i = index;"
+    [ngStyle]="{'top.px': 100 + (i * 70)}" [player]="player" [playerActive]="i == game.currentPlayer" class="player-position hide-mobile">
+</app-player>
+
+<div class="scrollcontainer hide-desktop">
+    <app-player-mobile  *ngFor="let player of game.players; let i = index;"
+        [name]="player" [playerActive]="i == game.currentPlayer">
+    </app-player-mobile>
+</div>
+
+<div *ngIf="game.gameOver" class="gameOver">
+    <img src="./assets/img/game_over.PNG" alt="">
+</div>
+
+<div *ngIf="!game.gameOver" class="table background">
+    <div class="card-circle hide-mobile">
+        <div *ngFor="let card of game.stack;let i = index;" (click)="pickCard(i)" class="card"
+            [ngClass]="{'distribute-card':game.distribute, 'taking-card':game.currentFace == card.face && !game.isTaken[i] ,'card-taken':game.isTaken[i]}"
+            [style.--animation-delay]="i * 50 + 'ms'" [style.--orgDegrees]="card.orgDegrees+ 'deg'"
+            [style.--level]="game.playedIndices.indexOf(i)" [style.--degrees]="card.degrees+'deg'"
+            [style.--XOffset]="card.XOffset+'px'" [style.--YOffset]="card.YOffset+'px'">
+            <div class="card-back">
+                <img src="assets/img/cards/background.png">
+            </div>
+            <div class="card-front">
+                <img src="assets/img/cards/{{ card.face }}.png">
+            </div>
+        </div>
+    </div>
+    <div class="card-circle hide-desktop">
+        <div *ngFor="let card of game.stack;let i = index;" (click)="pickCard(i)" class="card"
+            [ngClass]="{'distribute-card':game.distribute, 'taking-card':game.currentFace == card.face && !game.isTaken[i] ,'card-taken':game.isTaken[i]}"
+            [style.--animation-delay]="i * 50 + 'ms'" [style.--orgDegrees]="0 + 'deg'"
+            [style.--level]="game.playedIndices.indexOf(i)" [style.--degrees]="0 +'deg'" [style.--XOffset]="10 +'vw'"
+            [style.--YOffset]="5 +'vh'">
+            <div class="card-back">
+                <img src="assets/img/cards/background.png">
+            </div>
+            <div class="card-front">
+                <img src="assets/img/cards/{{ card.face }}.png">
+            </div>
+        </div>
+    </div>
 </div>
 <app-card-info [card]="game.currentFace" class="pin-bottom"></app-card-info>
-
-<button (click)="openDialog()" mat-fab color="primary" class="btn-add">
-   <mat-icon>person_add</mat-icon>
-</button>
+<div class="buttons">
+    <button (click)="openDialog()" mat-fab color="primary" class="btn">
+        <mat-icon>person_add</mat-icon>
+    </button>
+    <button (click)="openDialog()" mat-fab color="primary" class="btn">
+        <mat-icon>person_add</mat-icon>
+    </button>
+    <button (click)="openDialog()" mat-fab color="primary" class="btn">
+        <mat-icon>person_add</mat-icon>
+    </button>
+    <button (click)="openDialog()" mat-fab color="primary" class="btn">
+        <mat-icon>person_add</mat-icon>
+    </button>
+</div>

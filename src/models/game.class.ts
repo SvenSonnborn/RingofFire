@@ -3,16 +3,14 @@ import { Player } from "./player.class";
 
 export class Game {
   public distribute = true;
-  public players: string[] = [];
+  public players: Player[] = [];
   public stack: any[] = [];
-  public playedCards: string[] = [];
   public currentPlayer: number = 0;
   public isTaken: boolean[] = [];
   public currentFace: string = '';
   public playedIndices: number[] = [];
   public gameOver: boolean = false;
-  public pickCardAnimation = false;
-  public currentCard: string = '';
+  //public pickCardAnimation = false;
 
   constructor() {
     // Create all cards faces
@@ -50,8 +48,7 @@ export class Game {
       isTaken: this.isTaken,
       currentFace: this.currentFace,
       gameOver: this.gameOver,
-      pickCardAnimation : this.pickCardAnimation,
-      currentCard: this.currentCard
+      //pickCardAnimation : this.pickCardAnimation,
     };
   }
 

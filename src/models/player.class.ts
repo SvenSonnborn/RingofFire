@@ -1,4 +1,4 @@
 export class Player {
-    public playerName: string;
-    //public avatar: string;
+    public name: string;
+    public picture: string;
 }

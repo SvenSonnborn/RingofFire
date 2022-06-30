@@ -1,13 +1,13 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Player } from 'src/models/player.class';
-import { PlayerComponent } from '../player/player.component';
+
 
 @Component({
   selector: 'app-card-info',
   templateUrl: './card-info.component.html',
   styleUrls: ['./card-info.component.scss'],
 })
-export class CardInfoComponent implements OnChanges {
+export class CardInfoComponent implements OnInit, OnChanges {
   cardAction = [
     {
       title: 'Waterfall',
@@ -59,17 +59,33 @@ export class CardInfoComponent implements OnChanges {
     },
   ];
 
-  title: string = '';
-  description: string = '';
+  title = '';
+  description = '';
+  @Input() players: string;
   @Input() card: string;
   @Input() gameOver: boolean;
 
+
   constructor() {}
 
+  ngOnInit(): void {}
+
+  /**
+   * displays the text according to the current card or other instructions
+   */
   ngOnChanges(): void {
+    console.log('players sind', this.players);
+
     if (this.gameOver) {
-      this.title = "Game over!"
+      this.title = 'Game over!';
       this.description = 'Do you want more? Then start a new game!';
+    } else if (this.players.length == 0) {
+      this.title = 'Add a player';
+      this.description = 'Please add a player by clicking on the first button.';
+    } else if (this.players.length == 1) {
+      this.title = "Drinking alone isn't really fun";
+      this.description =
+        'Add more players! You can play with friends all over the world by sharing the URL of the game. ';
     } else if (this.card) {
       let currentType = +this.card.split('_')[0];
       this.title = this.cardAction[currentType - 1].title;

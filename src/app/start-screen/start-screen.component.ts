@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Game } from 'src/models/game';
+import { Game } from 'src/models/game.class';
 
 
 @Component({
