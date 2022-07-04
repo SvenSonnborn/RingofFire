@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "svring-9e3ba": {
-      "hosting": {
-        "ringoffire": [
-          "svring-9e3ba"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "svring-9e3ba"
   }
