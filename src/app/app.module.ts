@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
@@ -18,10 +17,13 @@ import { CardInfoComponent } from './card-info/card-info.component';
 import { MatCardModule } from '@angular/material/card';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { environment } from '../environments/environment';
-
+import { MatMenuModule} from '@angular/material/menu';
 import { AngularFireModule } from '@angular/fire/compat';
 import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
-
+import { DialogShareComponent } from './dialog-share/dialog-share.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 
 
@@ -38,6 +40,9 @@ import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
     CardInfoComponent,
     PlayerMobileComponent,
     EditPlayerComponent,
+    DialogShareComponent,
+    ImprintComponent,
+    PrivacyComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,8 @@ import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
     MatInputModule,
     MatCardModule,
     AngularFireModule.initializeApp(environment.firebase),
+    MatMenuModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

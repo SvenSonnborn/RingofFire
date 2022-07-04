@@ -4,7 +4,7 @@
 
 <div class="scrollcontainer hide-desktop">
     <app-player-mobile  *ngFor="let player of game.players; let i = index;"
-        [name]="player" [playerActive]="i == game.currentPlayer">
+    [player]="player" [playerActive]="i == game.currentPlayer">
     </app-player-mobile>
 </div>
 
@@ -42,18 +42,27 @@
         </div>
     </div>
 </div>
-<app-card-info [card]="game.currentFace" class="pin-bottom"></app-card-info>
+<app-card-info [card]="game.currentFace" [players]="game.players" [gameOver]="game.gameOver" class="pin-bottom"></app-card-info>
 <div class="buttons">
     <button (click)="openDialog()" mat-fab color="primary" class="btn">
         <mat-icon>person_add</mat-icon>
     </button>
-    <button (click)="openDialog()" mat-fab color="primary" class="btn">
-        <mat-icon>person_add</mat-icon>
+    <button mat-fab color="primary" (click)="shareDialog()" matTooltip="share game" class="btn">
+        <mat-icon>share</mat-icon>
     </button>
-    <button (click)="openDialog()" mat-fab color="primary" class="btn">
-        <mat-icon>person_add</mat-icon>
+    <button mat-fab color="primary" (click)="reset()" matTooltip="start new game" class="btn">
+        <mat-icon>refresh</mat-icon>
     </button>
-    <button (click)="openDialog()" mat-fab color="primary" class="btn">
-        <mat-icon>person_add</mat-icon>
+    <button mat-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="show menu" class="btn">
+        <mat-icon>menu</mat-icon>
     </button>
 </div>
+
+<mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/imprint">
+        <span>Imprint</span>
+    </a>
+    <a mat-menu-item routerLink="/privacy">
+        <span>Privacy</span>
+    </a>
+</mat-menu>

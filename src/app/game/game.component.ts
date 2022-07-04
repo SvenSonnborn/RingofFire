@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { throttle } from 'rxjs/operators';
-
+import { DialogShareComponent } from '../dialog-share/dialog-share.component';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -58,7 +56,6 @@ export class GameComponent implements OnInit {
     }, 4000);
 
     console.log('players sind', this.game.players);
-
   }
 
   saveGame() {
@@ -99,14 +96,35 @@ export class GameComponent implements OnInit {
     this.saveGame();
   }
 
+  /**
+   * start new game, players stay
+   */
+  reset() {
+    let players = this.game.players;
+    this.game = new Game();
+    this.game.players = players;
+    this.saveGame();
+    setTimeout(() => {
+      this.game.distribute = false;
+    }, 4000);
+    this.saveGame();
+  }
+
+  /**
+   * calls a dialog to facilitate copying the url of the game
+   */
+  shareDialog(): void {
+    this.dialog.open(DialogShareComponent);
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        this.game.players.push ({
-          'name': data.name,
-          'picture': data.picture
+        this.game.players.push({
+          name: data.name,
+          picture: data.picture,
         });
         //this.game.players.push(data.name);
         //this.game.player_images.push(data.picture);
@@ -114,6 +132,4 @@ export class GameComponent implements OnInit {
       }
     });
   }
-
-
 }
