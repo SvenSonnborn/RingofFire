@@ -78,14 +78,14 @@ export class CardInfoComponent implements OnInit, OnChanges {
 
     if (this.gameOver) {
       this.title = 'Game over!';
-      this.description = 'Do you want more? Then start a new game!';
+      this.description = 'Do you want to play more? Then start a new game!';
     } else if (this.players.length == 0) {
       this.title = 'Add a player';
       this.description = 'Please add a player by clicking on the first button.';
     } else if (this.players.length == 1) {
-      this.title = "Drinking alone isn't really fun";
+      this.title = "U don't have to drink alone!";
       this.description =
-        'Add more players! You can play with friends all over the world by sharing the URL of the game. ';
+        'Add more people! By sharing the URL u can invite every friend u want! ';
     } else if (this.card) {
       let currentType = +this.card.split('_')[0];
       this.title = this.cardAction[currentType - 1].title;
