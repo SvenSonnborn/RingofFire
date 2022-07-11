@@ -11,10 +11,10 @@
 <div *ngIf="game.gameOver" class="gameOver">
     <img src="./assets/img/game_over.PNG" alt="">
 </div>
-
+<div class="table noclick"></div>
 <div *ngIf="!game.gameOver" class="table background">
     <div class="card-circle hide-mobile">
-        <div *ngFor="let card of game.stack;let i = index;" (click)="pickCard(i)" class="card"
+        <div *ngFor="let card of game.stack;let i = index;" (click)="game.pickCardAnimation ? pickCard(i) : ''" class="card"
             [ngClass]="{'distribute-card':game.distribute, 'taking-card':game.currentFace == card.face && !game.isTaken[i] ,'card-taken':game.isTaken[i]}"
             [style.--animation-delay]="i * 50 + 'ms'" [style.--orgDegrees]="card.orgDegrees+ 'deg'"
             [style.--level]="game.playedIndices.indexOf(i)" [style.--degrees]="card.degrees+'deg'"
@@ -44,16 +44,17 @@
 </div>
 <app-card-info [card]="game.currentFace" [players]="game.players" [gameOver]="game.gameOver" class="pin-bottom"></app-card-info>
 <div class="buttons">
-    <button (click)="openDialog()" mat-fab color="primary" class="btn">
+    <button (click)="openDialog()" mat-fab color="primary" class="btn" matTooltip="Add Player"
+    matTooltipPosition="left">
         <mat-icon>person_add</mat-icon>
     </button>
-    <button mat-fab color="primary" (click)="shareDialog()" matTooltip="share game" class="btn">
+    <button mat-fab color="primary" (click)="shareDialog()" matTooltip="share game" matTooltipPosition="right" class="btn">
         <mat-icon>share</mat-icon>
     </button>
-    <button mat-fab color="primary" (click)="reset()" matTooltip="start new game" class="btn">
+    <button mat-fab color="primary" (click)="reset()" matTooltip="start new game" matTooltipPosition="left" class="btn">
         <mat-icon>refresh</mat-icon>
     </button>
-    <button mat-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="show menu" class="btn">
+    <button mat-fab color="primary" [matMenuTriggerFor]="menu" matTooltip="show menu" matTooltipPosition="right" class="btn">
         <mat-icon>menu</mat-icon>
     </button>
 </div>

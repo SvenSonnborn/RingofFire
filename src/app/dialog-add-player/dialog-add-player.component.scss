@@ -37,6 +37,10 @@
        border-radius: 50%;
        border: 1px solid rgb(224, 224, 224);
 
+       &:hover {
+        cursor: pointer;
+       }
+
        @media (max-height:600px) {
            margin-top: 0;
            width: 40px;

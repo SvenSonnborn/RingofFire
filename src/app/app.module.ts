@@ -24,6 +24,8 @@ import { DialogShareComponent } from './dialog-share/dialog-share.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 
 
@@ -59,6 +61,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     AngularFireModule.initializeApp(environment.firebase),
     MatMenuModule,
     ClipboardModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

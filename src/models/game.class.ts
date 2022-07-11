@@ -10,7 +10,7 @@ export class Game {
   public currentFace: string = '';
   public playedIndices: number[] = [];
   public gameOver: boolean = false;
-  //public pickCardAnimation = false;
+  public pickCardAnimation = false;
 
   constructor() {
     // Create all cards faces
@@ -48,7 +48,7 @@ export class Game {
       isTaken: this.isTaken,
       currentFace: this.currentFace,
       gameOver: this.gameOver,
-      //pickCardAnimation : this.pickCardAnimation,
+      pickCardAnimation : this.pickCardAnimation,
     };
   }
 
@@ -79,8 +79,8 @@ export class Game {
 
 /**
  * Fisher-Yates Shuffle for shuffling the card stack in place
- * @param array 
- * @returns array 
+ * @param array
+ * @returns array
  */
  function shuffle(array) {
   let currentIndex = array.length;

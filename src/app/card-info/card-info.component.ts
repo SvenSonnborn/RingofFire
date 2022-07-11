@@ -80,8 +80,8 @@ export class CardInfoComponent implements OnInit, OnChanges {
       this.title = 'Game over!';
       this.description = 'Do you want to play more? Then start a new game!';
     } else if (this.players.length == 0) {
-      this.title = 'Add a player';
-      this.description = 'Please add a player by clicking on the first button.';
+      this.title = 'Add two player';
+      this.description = 'Please add two players by clicking on the button.';
     } else if (this.players.length == 1) {
       this.title = "U don't have to drink alone!";
       this.description =

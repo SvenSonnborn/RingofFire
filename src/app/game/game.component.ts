@@ -47,15 +47,16 @@ export class GameComponent implements OnInit {
           this.game.isTaken = game.isTaken;
           this.game.currentFace = game.currentFace;
           this.game.gameOver = game.gameOver;
+          this.game.pickCardAnimation = game.pickCardAnimation
         });
     });
 
     // distribution of cards is completed
     setTimeout(() => {
       this.game.distribute = false;
+      this.game.pickCardAnimation = true
+      this.saveGame();
     }, 4000);
-
-    console.log('players sind', this.game.players);
   }
 
   saveGame() {
@@ -67,8 +68,13 @@ export class GameComponent implements OnInit {
 
   // function which allways start when someone picks a card (only possible when cardAnimation is not running)
   pickCard(index: number) {
-    if (this.game.players.length >= 2 && !this.game.isTaken[index]) {
+    if (
+      this.game.players.length > 1 &&
+      !this.game.isTaken[index] &&
+      this.game.distribute === false
+    ) {
       this.game.currentFace = this.game.stack[index].face;
+      this.game.pickCardAnimation = false;
       this.game.playedIndices.push(index);
       console.log(
         'index: ',
@@ -84,7 +90,10 @@ export class GameComponent implements OnInit {
         this.game.currentPlayer++;
         this.game.currentPlayer =
           this.game.currentPlayer % this.game.players.length;
-      }, 2000);
+        this.game.pickCardAnimation = true;
+        this.saveGame();
+
+      }, 1000);
 
       if (this.game.playedIndices.length == 52) {
         setTimeout(() => {
@@ -106,6 +115,8 @@ export class GameComponent implements OnInit {
     this.saveGame();
     setTimeout(() => {
       this.game.distribute = false;
+      this.game.pickCardAnimation = true
+      this.saveGame();
     }, 4000);
     this.saveGame();
   }

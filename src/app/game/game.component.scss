@@ -189,9 +189,9 @@ app-player-mobile {
   position: absolute;
   flex-wrap: wrap;
   width: 20vw;
-  height: 8vh;
-  bottom: 3vh;
-  right: 0;
+  height: 120px;
+  bottom: 2vh;
+  right: 60px;
   max-width: 180px;
 }
 .btn {
@@ -211,6 +211,7 @@ app-player-mobile {
     width: 90vw;
     height: 70vh;
     border-radius: 5%;
+    max-width: 800px;
   }
 }
 
