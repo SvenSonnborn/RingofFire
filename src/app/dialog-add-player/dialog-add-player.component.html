@@ -21,6 +21,6 @@
 </mat-dialog-content>
 
 <div mat-dialog-actions>
-  <button mat-button>No Thanks</button>
+  <button mat-button (click)="dialogRef.close()">No Thanks</button>
   <button mat-button [disabled]="form.value.name.length==0||form.value.avatar==''" [mat-dialog-close]="form.value">Ok</button>
 </div>

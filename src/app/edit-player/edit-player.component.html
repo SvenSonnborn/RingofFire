@@ -1,9 +1,15 @@
 <h1 mat-dialog-title>Edit player</h1>
-
-
-<img *ngFor="let picture of allProfilePicutres" [mat-dialog-close]="picture" src="./assets/img/User/{{picture}}" class="profilepicture">
+<mat-dialog-content [formGroup]="form">
+  <div class="avatar">
+    <label *ngFor="let picture of allProfilePictures;let i=index">
+      <input type="radio" name="picture" [value]="picture" formControlName="picture">
+      <img [class.checked]="form.value.picture==picture" src="./assets/img/User/{{ picture }}">
+    </label>
+  </div>
+</mat-dialog-content>
 
 <div mat-dialog-actions>
-   <button mat-button (click)="dialogRef.close()">Close</button>
-   <button mat-button color="warn" [mat-dialog-close]="'DELETE'" cdkFocusInitial>Delete Player</button>
- </div>
+  <button mat-button (click)="dialogRef.close()">Close</button>
+  <button mat-button color="warn" [mat-dialog-close]="'DELETE'" cdkFocusInitial>Delete Player</button>
+  <button mat-button [disabled]="form.value.avatar==''" [mat-dialog-close]="form.value">Ok</button>
+</div>

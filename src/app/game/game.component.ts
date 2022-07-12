@@ -7,6 +7,7 @@ import { interval } from 'rxjs';
 import { throttle } from 'rxjs/operators';
 import { DialogShareComponent } from '../dialog-share/dialog-share.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -47,14 +48,14 @@ export class GameComponent implements OnInit {
           this.game.isTaken = game.isTaken;
           this.game.currentFace = game.currentFace;
           this.game.gameOver = game.gameOver;
-          this.game.pickCardAnimation = game.pickCardAnimation
+          this.game.pickCardAnimation = game.pickCardAnimation;
         });
     });
 
     // distribution of cards is completed
     setTimeout(() => {
       this.game.distribute = false;
-      this.game.pickCardAnimation = true
+      this.game.pickCardAnimation = true;
       this.saveGame();
     }, 4000);
   }
@@ -92,7 +93,6 @@ export class GameComponent implements OnInit {
           this.game.currentPlayer % this.game.players.length;
         this.game.pickCardAnimation = true;
         this.saveGame();
-
       }, 1000);
 
       if (this.game.playedIndices.length == 52) {
@@ -115,7 +115,7 @@ export class GameComponent implements OnInit {
     this.saveGame();
     setTimeout(() => {
       this.game.distribute = false;
-      this.game.pickCardAnimation = true
+      this.game.pickCardAnimation = true;
       this.saveGame();
     }, 4000);
     this.saveGame();
@@ -137,10 +137,23 @@ export class GameComponent implements OnInit {
           name: data.name,
           picture: data.picture,
         });
-        //this.game.players.push(data.name);
-        //this.game.player_images.push(data.picture);
         this.saveGame();
       }
+    });
+  }
+
+  editPlayer(playerId: number) {
+    console.log('id is', playerId);
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        if ((data = 'DELETE')) {
+          this.game.players.splice(playerId, 1)
+        } else {
+          this.game.players[playerId].picture = data.picture;
+        }
+      }
+      this.saveGame();
     });
   }
 }
