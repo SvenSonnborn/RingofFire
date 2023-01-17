@@ -147,7 +147,7 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
-        if ((data = 'DELETE')) {
+        if ((data == 'DELETE')) {
           this.game.players.splice(playerId, 1)
         } else {
           this.game.players[playerId].picture = data.picture;

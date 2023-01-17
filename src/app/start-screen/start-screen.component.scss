@@ -11,6 +11,7 @@
 
   img {
     width: 100vw;
+    max-width: 1700px;
 
     @media (max-width: 960px) {
       width: 1000px;
